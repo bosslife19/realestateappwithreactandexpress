@@ -7,6 +7,7 @@ import Layout from './pages/layout/Layout'
 import SinglePage from './pages/singlePage/SinglePage'
 import Login from './pages/login/Login'
 import ProfilePage from './pages/profilePage/ProfilePage'
+import Register from './pages/register/Register'
 function App() {
   const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ function App() {
           element:<Login/>,
          
         },
+        {
+          path:'/register',
+          element:<Register/>
+        }
       ]
     },
 
