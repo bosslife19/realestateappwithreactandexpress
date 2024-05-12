@@ -17,6 +17,47 @@ model User {
   password String
   avatar String?
   createdAt DateTime @default(now())
+  posts Post[]
 }
+
+model Post {
+  id    Int     @id @default(autoincrement())
+  title String  
+  price  Int
+  img1 String
+  img2 String
+  img3 String
+  img4 String 
+  address String?
+  city String?
+  bedroom Int
+  bathroom Int
+  latitude String
+  longitude String
+  type String
+  property String
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId], references: [id])
+  userId Int 
+  postDetail PostDetail?
+
+}
+
+model PostDetail {
+  id Int     @id @default(autoincrement())
+  desc String?
+  utilities String?
+  pet String?
+  income String?
+  size Int?
+  school Int?
+  bus Int?
+  restaurant Int?
+  post Post @relation(fields: [postId], references: [id])
+  postId Int @unique
+
+}
+
+
 
 

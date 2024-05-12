@@ -32,6 +32,8 @@ export const getUser = async (req, res)=>{
 
 export const updateUser = async (req, res)=>{
     const id = req.params.id;
+
+    console.log(id);
     const tokenUserId = req.userId;
     const {password,avatar, ...others} = req.body;
 
@@ -52,8 +54,9 @@ export const updateUser = async (req, res)=>{
         })
 
         const {password:userPassword, ...rest} = updatedUser
-
-        res.status(200).json(others);
+        
+        res.status(200).json(rest);
+        
         
     } catch (error) {
         console.log(error)

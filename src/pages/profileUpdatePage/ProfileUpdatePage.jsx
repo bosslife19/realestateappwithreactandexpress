@@ -3,10 +3,12 @@ import "./ProfileUpdate.scss";
 import { AuthContext } from "../../context/AuthContext";
 import axiosInstance from "../../lib/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [avatar, setAvatar] = useState([])
 
   const navigate = useNavigate()
   const handleSubmit = async (e) => {
@@ -21,11 +23,12 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
+        avatar: avatar[0],
       });
-
-      console.log(res.data)
+     
 
       updateUser(res.data)
+      
       navigate('/profile')
       
     } catch (error) {
@@ -67,11 +70,20 @@ function ProfileUpdatePage() {
       <div className="sideContainer">
         <img
           src={
-            currentUser.avatar ||
+            avatar[0] ||currentUser.avatar ||
             "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           }
           alt=""
           className="avatar"
+        />
+        <UploadWidget uwConfig={{
+          cloudName:'wokodavid',
+          uploadPreset:'estate-app',
+          multiple:false,
+          maxImageFileSize:4000000,
+          folder:'avatars'
+        }}
+          setState={setAvatar}
         />
       </div>
     </div>
